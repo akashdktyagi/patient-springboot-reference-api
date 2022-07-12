@@ -73,7 +73,14 @@ Step by Step Guide. All the steps are managed in side different Branches.
     * Run the Feature file again and this time you will see the step defs in the console as mentioned in above
     * Copy the methods names and create a new class under integrationtests package and save the methods there.
     * Run the feature file again and this time there will be failure but different one.
-    * New Error will now say, pending steps, this is how cucumber is asking you to implement the test. 
-    * You can now write tests which resembles the functinality. In the next step/branch we will implement our test.
+    * New Error will now say, pending steps, this is how cucumber is asking you to implement the test.
+      * ```text
+            
+        Step pending
+        TODO: implement me
+        
+        ```
+        
+    * You can now write tests which resembles the functinality or Behaviour. In the next step/branch we will implement our test.
     * Those test will again, but still we will implement it. Because we are going BDD but also adopting how TDD is practiced.
     
