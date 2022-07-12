@@ -5,12 +5,15 @@ This repository is to hold a reference spring boot api and tutorial. This repo i
 ---
 Step by Step Guide. All the steps are managed in side different Branches.
 
-### Steps to Follow:
+
 
 * We want to develop our API using Behaviour Driven Development methodology.
 * Advantages of this approach is quite simple. If you want your API to conform with the requirements given to you by the Business and you want to be absolutly sure that you have impl all the requirement and user journeys which Business asked you to do.
 * Is your API Impl "validatable" from Business person perspective.
-* Checkout Branch: ```1_feature_file_cucumber_setup``` . I have made below changes in this branch:
+
+### Steps to Follow: Keep Checkout the branch to see the changes done. Steps are managed under the branches to easily witness the changes made in each step.
+  
+* Checkout Branch: ```1_feature_file_cucumber_setup```:
     * Add cucumber related libraries in the pom.xml file. 
         * below cucumber libraries are necessary
             * ```xml
@@ -66,3 +69,21 @@ Step by Step Guide. All the steps are managed in side different Branches.
       
             ...
         ```
+* Checkout Branch: ```2_add_cucumber_stepdef```
+    * Run the Feature file again and this time you will see the step defs in the console as mentioned in above code snippet.
+    * Copy the methods names and create a new class under integrationtests package and save the methods there.
+    * Run the feature file again and this time there will be failure but different kind of error.
+    * New Error will now say, pending steps, this is how cucumber is asking you to implement the test.
+      * ```text
+            
+        Step pending
+        TODO: implement me
+        
+        ```
+        
+    * You can now write tests which resembles the functinality or Behaviour which we created earlier in Gherkin or in our PatientApi.feature file. 
+      In the next step/branch we will implement our test.
+    * Those test will fail again, but still we will implement it. Because we are going BDD but also adopting how TDD is practiced. i.e. you write the test and then run it and then fix the errors and then run it again. Simple! The same sort of approach is what we are trying to do. 
+    * But to highlight, we are not entirely doing a TDD or test driven development at the moment. We are still doing BDD, but TDD style!!
+    * So far, our tests are failing but they are not failing due to api's expected functional behaviour or so to say, what this api should do. Lets implement the test in the next steps.
+    
