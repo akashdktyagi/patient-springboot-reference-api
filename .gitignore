@@ -34,3 +34,4 @@ build/
 target
 patient-api.iml
 .idea
+.DS_Store
