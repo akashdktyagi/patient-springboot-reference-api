@@ -85,5 +85,5 @@ Step by Step Guide. All the steps are managed in side different Branches.
       In the next step/branch we will implement our test.
     * Those test will fail again, but still we will implement it. Because we are going BDD but also adopting how TDD is practiced. i.e. you write the test and then run it and then fix the errors and then run it again. Simple! The same sort of approach is what we are trying to do. 
     * But to highlight, we are not entirely doing a TDD or test driven development at the moment. We are still doing BDD, but TDD style!!
-    * So far, our tests are failing but they are not failing due to apps expected functional behaviour as of yet. Lets implement the test in the next steps.
+    * So far, our tests are failing but they are not failing due to api's expected functional behaviour or so to say, what this api should do. Lets implement the test in the next steps.
     
