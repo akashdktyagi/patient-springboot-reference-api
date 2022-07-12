@@ -70,9 +70,9 @@ Step by Step Guide. All the steps are managed in side different Branches.
             ...
         ```
 * Checkout Branch: ```2_add_cucumber_stepdef```
-    * Run the Feature file again and this time you will see the step defs in the console as mentioned in above
+    * Run the Feature file again and this time you will see the step defs in the console as mentioned in above code snippet.
     * Copy the methods names and create a new class under integrationtests package and save the methods there.
-    * Run the feature file again and this time there will be failure but different one.
+    * Run the feature file again and this time there will be failure but different kind of error.
     * New Error will now say, pending steps, this is how cucumber is asking you to implement the test.
       * ```text
             
@@ -81,6 +81,9 @@ Step by Step Guide. All the steps are managed in side different Branches.
         
         ```
         
-    * You can now write tests which resembles the functinality or Behaviour. In the next step/branch we will implement our test.
-    * Those test will again, but still we will implement it. Because we are going BDD but also adopting how TDD is practiced.
+    * You can now write tests which resembles the functinality or Behaviour which we created earlier in Gherkin or in our PatientApi.feature file. 
+      In the next step/branch we will implement our test.
+    * Those test will fail again, but still we will implement it. Because we are going BDD but also adopting how TDD is practiced. i.e. you write the test and then run it and then fix the errors and then run it again. Simple! The same sort of approach is what we are trying to do. 
+    * But to highlight, we are not entirely doing a TDD or test driven development at the moment. We are still doing BDD, but TDD style!!
+    * So far, our tests are failing but they are not failing due to apps expected functional behaviour as of yet. Lets implement the test in the next steps.
     
