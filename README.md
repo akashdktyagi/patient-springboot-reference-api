@@ -96,3 +96,9 @@ Step by Step Guide. All the steps are managed in side different Branches.
     * See the StepDef.class under test folder.
     * From feature file, we are sending some data, which is what we are capturing in the Given step using map collection type.
     * We are then converting it in to a body for our request and in the when step we are performing the post operation.
+    * And we will do again, what we always do, Run the Feature file. And this time when you will run it, two steps will pass and one fail with the reason that API did not respond with status as "201". Which is obvious because, API is not yet running and localhost server send 404 status code in reply.
+        * Error:
+          *  ```text
+            Step failed
+            java.lang.AssertionError: Response status expected:<201> but was:<404>
+            ```
