@@ -125,5 +125,5 @@ Step by Step Guide. All the steps are managed in side different Branches.
     * One more important change I have made here in this step. I have added a ```application.yml``` file. This file contains all the necessary Spring configuration settings. Currently, it has just one setting i.e. port number. I have set up as 9096, you can choose valid port.
     * I have also modified, the server name in the test to point to http://localhost:9096
     * And now when I ran my test, the result was better than before; i.e. I am able to get a valid reply from the api i.e. status 200. 
-    * But I know this is not correct and I need to implement more things, i.e Model class, DB connections, Service Class etc. All that we will next step.
+    * But I know this is not correct and I need to implement more things, i.e Model class, DB connections, Service Class etc. All that we will do in next step.
     
