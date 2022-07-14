@@ -3,27 +3,52 @@ package com.automationfraternity.patientapi.integrationtests;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.net.URI;
+import java.util.Map;
 
 public class StepDefs {
-    @Given("I have application up and running")
-    public void i_have_application_up_and_running() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    String server = "localhost";
+    String postEndPoint = "/patient";
+    String body = "";
+    ResultActions resultsAction;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @Given("I have patient details as below")
+    public void i_have_patient_details_as_below(Map<String,String> data) {
+        String name = data.get("name");
+        String age = data.get("age");
+        String email = data.get("email");
+        String phone = data.get("phone");
+        String medicalConditions = data.get("medicalConditions");
+
+        body = "\"name\": "+name+",\n" +
+                "\"age\": "+age+",\n" +
+                "\"email\": "+email+",\n" +
+                "\"phone\": "+phone+",\n" +
+                "\"medicalConditions\": "+medicalConditions+"\n" +
+                "},";
     }
-    @When("I create the patient with below details")
-    public void i_create_the_patient_with_below_details(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+
+    @When("I create the patient")
+    public void i_create_the_patient() throws Exception {
+        resultsAction = mockMvc.perform(
+                            post(URI.create(server + postEndPoint))
+                            .contentType("application/json")
+                            .content(body)
+                        );
     }
-    @Then("a new patient is being created")
-    public void a_new_patient_is_being_created() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("a new patient is created")
+    public void a_new_patient_is_created() throws Exception {
+        resultsAction.andExpect(status().is(201));
     }
 }

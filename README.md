@@ -86,4 +86,13 @@ Step by Step Guide. All the steps are managed in side different Branches.
     * Those test will fail again, but still we will implement it. Because we are going BDD but also adopting how TDD is practiced. i.e. you write the test and then run it and then fix the errors and then run it again. Simple! The same sort of approach is what we are trying to do. 
     * But to highlight, we are not entirely doing a TDD or test driven development at the moment. We are still doing BDD, but TDD style!!
     * So far, our tests are failing but they are not failing due to api's expected functional behaviour or so to say, what this api should do. Lets implement the test in the next steps.
-    
+
+* Checkout Branch: ```3_added_mock_mvc_config_and_steps```
+    * Well now in this step we will use Spring's Mock Mvc class to write our test.
+    * MockMvc is a class which has all the necessary methods to make an http call with all the relevant information which can be set like contentType, Body, headers etc.
+    * To make it work, we need two more additional setting, we need to tell Spring to Auto Configure this Bean or Object. This we will do in "CucumberSpringConfiguration".
+    * Secondly, we need to inject this MockMvc object in our StepDefs.class file so that we can use its methods to perform http calls on our "yet to be creatd", api calls. This we do by using another annotation called  @AutoWired. This annotation is responsible for injecting the bean or object in our Step Def file. This is also called as Dependency Injection this concept is at the heart of Spring eco system."
+    * Once, we do this we can then use this object to write our test which is structured with in the cucumber steps.
+    * See the StepDef.class under test folder.
+    * From feature file, we are sending some data, which is what we are capturing in the Given step using map collection type.
+    * We are then converting it in to a body for our request and in the when step we are performing the post operation.
