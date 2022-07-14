@@ -1,16 +1,23 @@
 package com.automationfraternity.patientapi.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.automationfraternity.patientapi.model.Product;
+import com.automationfraternity.patientapi.service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
+@ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
 public class PatientRestController {
 
+    @Autowired
+    PatientService patientService;
+
     @PostMapping("/patient")
-    public String createPatient(){
-        return "";
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Product createPatient(@RequestBody Product product){
+        return patientService.createNewPatient(product);
+
     }
 }

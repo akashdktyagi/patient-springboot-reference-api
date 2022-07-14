@@ -126,4 +126,16 @@ Step by Step Guide. All the steps are managed in side different Branches.
     * I have also modified, the server name in the test to point to http://localhost:9096
     * And now when I ran my test, the result was better than before; i.e. I am able to get a valid reply from the api i.e. status 200. 
     * But I know this is not correct and I need to implement more things, i.e Model class, DB connections, Service Class etc. All that we will do in next step.
-    
+  
+* Checkout Branch: ```5_impl_model_service_repo```
+  * Now we are really focused on developing our API. 
+  * You need four basic things, to create crud api. Controller, Service, Repository and lastly an DB instance.
+  * I will create the Model class first, so that I could map the data sent from the caller.
+  * Then I will create a service class, this service class will have logic to read the data and call the repository method.
+  * Finally, I will use a JPA Interface for DB operations. This I will call as repository. For this all I need to do is to create an interface and extend it with another interface called as JpaRepository. Spring boot is built on top of Spring and it has all the usefull features of the Spring including the DB persitance impl. This interface contains all the usefull DB operations, so that yop do not have to write any queries and these queries are automatically generated for you on the fly. However, it also provides you ways to write your own custom queries. But all te basic db operations, like select, insert etc are actually covered.
+    * JpaRepository is a JPA (Java Persistence API) specific extension of Repository.
+    * It contains the full API of CrudRepository and PagingAndSortingRepository.
+    * T: Domain type that repository manages (Generally the Entity/Model class name)
+    * ID: Type of the id of the entity that repository manages (Generally the wrapper class of your @Id that is created inside the Entity/Model class)
+    * You can run the API manually and run the curl command to see the effect.
+    * ```curl --request POST --url http://localhost:9096/patient --header 'content-type: application/json' --data '{"name":"akash"}'```
