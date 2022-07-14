@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class StepDefs {
 
-    String server = "localhost";
+    String server = "http://localhost:9096";
     String postEndPoint = "/patient";
     String body = "";
     ResultActions resultsAction;

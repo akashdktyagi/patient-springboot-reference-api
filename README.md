@@ -104,3 +104,26 @@ Step by Step Guide. All the steps are managed in side different Branches.
             java.lang.AssertionError: Response status expected:<201> but was:<404>
           
             ```
+
+* Checkout Branch: ```4_impl_controller_post_end_point```
+    * Now enough of tests. Now I need to make this test pass.
+    * So, I will start Controller Class. This class is the face of our rest full API.
+    * This controller class will receive the request from the client software and it will reroute it to the relevant business logic and pass the sent data to that Business Login Method.
+    * Then I will add the controller class.
+    * ```java
+        @RestController
+        @RequestMapping("/")
+        public class PatientRestController {
+        
+            @PostMapping("/patient")
+            public String createPatient(){
+                return "";
+            }
+        }
+        ```
+    * I have added three main annotations here, @RestController, @RequestMapping and @PostMapping. This is returing an empty string.
+    * One more important change I have made here in this step. I have added a ```application.yml``` file. This file contains all the necessary Spring configuration settings. Currently, it has just one setting i.e. port number. I have set up as 9096, you can choose valid port.
+    * I have also modified, the server name in the test to point to http://localhost:9096
+    * And now when I ran my test, the result was better than before; i.e. I am able to get a valid reply from the api i.e. status 200. 
+    * But I know this is not correct and I need to implement more things, i.e Model class, DB connections, Service Class etc. All that we will do in next step.
+    
