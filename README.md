@@ -89,16 +89,18 @@ Step by Step Guide. All the steps are managed in side different Branches.
 
 * Checkout Branch: ```3_added_mock_mvc_config_and_steps```
     * Well now in this step we will use Spring's Mock Mvc class to write our test.
-    * MockMvc is a class which has all the necessary methods to make an http call with all the relevant information which can be set like contentType, Body, headers etc.
-    * To make it work, we need two more additional setting, we need to tell Spring to Auto Configure this Bean or Object. This we will do in "CucumberSpringConfiguration".
-    * Secondly, we need to inject this MockMvc object in our StepDefs.class file so that we can use its methods to perform http calls on our "yet to be creatd", api calls. This we do by using another annotation called  @AutoWired. This annotation is responsible for injecting the bean or object in our Step Def file. This is also called as Dependency Injection this concept is at the heart of Spring eco system."
-    * Once, we do this we can then use this object to write our test which is structured with in the cucumber steps.
+    * MockMvc is a class which has all the necessary methods to make an http call and we can set the verb i.e. get/post/put/delete and other relevant information like contentType, Body, headers etc.
+    * To make it work, we need two more additional settings, 1. we need to tell Spring to Auto Configure this Bean or Object which is MockMvc and all its dependencies. This we will do in "CucumberSpringConfiguration.class".
+    * Secondly, we need to inject this MockMvc object in our StepDefs.class file so that we can use its methods to perform http calls on our "yet to be creatd", api post end point. This we do by using another annotation called  @AutoWired. This annotation is responsible for injecting the bean or object in our Step Def class file. This is also called as Dependency Injection and this concept is at the heart of Spring frameworks."
+    * Once, we do this we can then use this object to write our test which is structured with in the cucumber methods.
     * See the StepDef.class under test folder.
     * From feature file, we are sending some data, which is what we are capturing in the Given step using map collection type.
-    * We are then converting it in to a body for our request and in the when step we are performing the post operation.
-    * And we will do again, what we always do, Run the Feature file. And this time when you will run it, two steps will pass and one fail with the reason that API did not respond with status as "201". Which is obvious because, API is not yet running and localhost server send 404 status code in reply.
+    * We are then converting the data in to a string for our request and in the when step we are performing the post operation.
+    * In the last step we are using a assertion statement to validate that the response of the call has status code as '201'. This is the most important step of the test and this detemines what to expect from a user Scenario expressed in Gherkin feature file.
+    * And we will do again, what we always do, i.e. we will Run the Feature file. And this time when you will run it, two steps will pass and one fail with the reason that API did not respond with status as "201". Which is obvious because, API is not yet created and localhost server send 404 status code in reply.
         * Error:
-          *  ```text
+           ```text
             Step failed
             java.lang.AssertionError: Response status expected:<201> but was:<404>
+          
             ```
