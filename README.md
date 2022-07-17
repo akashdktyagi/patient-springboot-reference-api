@@ -147,5 +147,8 @@ Step by Step Guide. All the steps are managed in side different Branches.
     * ```curl --request POST --url http://localhost:9096/patient --header 'content-type: application/json' --data '{"name":"akash"}'```
   * Finally, we are going to modify our test to invoke this new end point and this time we have added one more assertion. i.e. checking the content of the response. This gives more validity to our test. So, as a thumb rule, add as many checkpoints, or assertions. These assertions, are the ones, which are the most important, component of your test. They are the ones, who catch your bugs.
   * And then we run it again and voila! its all green! 
-  * ![All Gree](ss/Step5.png)
+  * ![All Gree](ss/Step5-cucumberstepspassed.png)
   * But wait, where is our DB? Lets set up a simple DB in our next step.
+  
+* Checkout Branch: ```6_h2_db_impl```
+  * Our test was getting passed earlier as well. Why? Because we already had a h2 db dependency created when we
