@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

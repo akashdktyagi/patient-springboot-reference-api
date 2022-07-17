@@ -1,6 +1,6 @@
 package com.automationfraternity.patientapi.integrationtests;
 
-import com.automationfraternity.patientapi.model.Product;
+import com.automationfraternity.patientapi.model.Patient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.Given;
@@ -35,7 +35,7 @@ public class StepDefs {
         String phone = data.get("phone");
         String medicalConditions = data.get("medicalConditions");
 
-        Product product = Product.builder()
+        Patient patient = Patient.builder()
                 .withName(name)
                 .withAge(age)
                 .withEmail(email)
@@ -43,7 +43,7 @@ public class StepDefs {
                 .withMedicalConditions(medicalConditions)
                 .build();
         ObjectMapper objectMapper = new ObjectMapper();
-        body = objectMapper.writeValueAsString(product);
+        body = objectMapper.writeValueAsString(patient);
 
 //        body = "{\"name\": "+name+",\n" +
 //                "\"age\": "+age+",\n" +
@@ -64,6 +64,6 @@ public class StepDefs {
     @Then("a new patient is created")
     public void a_new_patient_is_created() throws Exception {
         resultsAction.andExpect(status().is(201));
-        resultsAction.andExpect(content().string("akash"));
+        resultsAction.andExpect(content().string("{\"id\":1,\"name\":\"akash\",\"age\":\"37\",\"email\":\"akash@akash.com\",\"phone\":\"123456789\",\"medicalConditions\":\"i am just plain stupid\"}"));
     }
 }

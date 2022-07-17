@@ -1,6 +1,6 @@
 package com.automationfraternity.patientapi.repository;
 
-import com.automationfraternity.patientapi.model.Product;
+import com.automationfraternity.patientapi.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * T: Domain type that repository manages (Generally the Entity/Model class name)
  * ID: Type of the id of the entity that repository manages (Generally the wrapper class of your @Id that is created inside the Entity/Model class)
  */
-public interface PatientRepository extends JpaRepository<Product,Long> {
+public interface PatientRepository extends JpaRepository<Patient,Long> {
 }
