@@ -1,5 +1,8 @@
 package com.automationfraternity.patientapi.integrationtests;
 
+import com.automationfraternity.patientapi.model.Patient;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.net.URI;
@@ -24,19 +28,29 @@ public class StepDefs {
     MockMvc mockMvc;
 
     @Given("I have patient details as below")
-    public void i_have_patient_details_as_below(Map<String,String> data) {
+    public void i_have_patient_details_as_below(Map<String,String> data) throws JsonProcessingException {
         String name = data.get("name");
         String age = data.get("age");
         String email = data.get("email");
         String phone = data.get("phone");
         String medicalConditions = data.get("medicalConditions");
 
-        body = "\"name\": "+name+",\n" +
-                "\"age\": "+age+",\n" +
-                "\"email\": "+email+",\n" +
-                "\"phone\": "+phone+",\n" +
-                "\"medicalConditions\": "+medicalConditions+"\n" +
-                "},";
+        Patient patient = Patient.builder()
+                .withName(name)
+                .withAge(age)
+                .withEmail(email)
+                .withPhone(phone)
+                .withMedicalConditions(medicalConditions)
+                .build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        body = objectMapper.writeValueAsString(patient);
+
+//        body = "{\"name\": "+name+",\n" +
+//                "\"age\": "+age+",\n" +
+//                "\"email\": "+email+",\n" +
+//                "\"phone\": "+phone+",\n" +
+//                "\"medicalConditions\": "+medicalConditions+"\n" +
+//                "},";
     }
 
     @When("I create the patient")
@@ -50,5 +64,6 @@ public class StepDefs {
     @Then("a new patient is created")
     public void a_new_patient_is_created() throws Exception {
         resultsAction.andExpect(status().is(201));
+        resultsAction.andExpect(content().string("{\"id\":1,\"name\":\"akash\",\"age\":\"37\",\"email\":\"akash@akash.com\",\"phone\":\"123456789\",\"medicalConditions\":\"i am just plain stupid\"}"));
     }
 }

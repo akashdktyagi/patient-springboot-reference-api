@@ -2,8 +2,8 @@ Feature: As a user, I am able to create, delete, update and get the patient deta
 
   Scenario: As a client, I am able to create a new patient
     Given I have patient details as below
-      | Name              | akash                  |
-      | Age               | 37                     |
+      | name              | akash                  |
+      | age               | 37                     |
       | email             | akash@akash.com        |
       | phone             | 123456789              |
       | medicalConditions | i am just plain stupid |

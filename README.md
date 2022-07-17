@@ -126,4 +126,26 @@ Step by Step Guide. All the steps are managed in side different Branches.
     * I have also modified, the server name in the test to point to http://localhost:9096
     * And now when I ran my test, the result was better than before; i.e. I am able to get a valid reply from the api i.e. status 200. 
     * But I know this is not correct and I need to implement more things, i.e Model class, DB connections, Service Class etc. All that we will do in next step.
-    
+  
+* Checkout Branch: ```5_impl_model_service_repo```
+  * Now we are really focused on developing our API. 
+  * You need four basic things, to create crud api. Controller, Service, Repository and lastly an DB instance.
+  * I will create the Model class first, to represent and manipulate my entity or simply the data.
+  * Then I will create a service class, this service class will have logic to manipulate the data and call the repository(DB methods) method.
+  * Finally, I will use a JPA Interface for DB operations. This I will call as repository. For this all I need to do is to create an interface and extend it with another interface called as JpaRepository. Spring boot is built on top of Spring and it has all the usefull features of the Spring including the DB persitance impl. This interface contains all the usefull DB operations, so that you do not have to write any queries. These queries are automatically generated for you on the fly. However, it also provides you ways to write your own custom queries. But all te basic db operations, like select, insert etc are actually covered.
+    * JpaRepository is a JPA (Java Persistence API) specific extension of Repository.
+    * It contains the full API of CrudRepository and PagingAndSortingRepository.
+    * T: Domain type that repository manages (Generally the Entity/Model class name)
+    * ID: Type of the id of the entity that repository manages (Generally the wrapper class of your @Id that is created inside the Entity/Model class)
+  * Important things to note in these files.
+  * Model: Annotated with ```@Entity``` and added a new variable/column id, annotated as ```@Id```.v Also, added lot of Lombok annotations like ```@Data, @Getter, @Setter etc``` to avoid boiler plate code.
+  * Service: Contains the business Logic is aannotated as ```@Service```
+  * Repositoy: This class extends ```JpaRepository.class```. This interface gives all the usefull methods which expresses or get converted in to queries during the actual DB interaction.
+  * ```@Autowired```: This annotation is used to inject objects in the Spring Context. As stated earlier in previous step, Autowiring or Injection or Depdency Injection or IoC (Inversion of Control) are all related and almost things and is at the root of Spring Framework. In a laymen terms, Spring is asking us to tell Spring, what object you need and not to create it yourself. And Spring FW will manage the objects lifecycle and not you. So Simple statement, "In Spring, you do not create Object, you Inject them". By Injection, we mean a instrcution from "developer" to "Spring FW", that "Create" this object for me. It has huge advatages which we is not super evident when your software is this small. But has huge implications, when features in your software grows. Hwoever, to keep things simple, we will not go there at the moement.
+  * Controller Class has a new annotation: ```@ResponseStatus``` this is to return the response code. There are better ways to do this, as we shall see in later steps. But for now, this is how we are going to return the status code.
+  * You can run the API manually and run the curl command to see the effect.
+    * ```curl --request POST --url http://localhost:9096/patient --header 'content-type: application/json' --data '{"name":"akash"}'```
+  * Finally, we are going to modify our test to invoke this new end point and this time we have added one more assertion. i.e. checking the content of the response. This gives more validity to our test. So, as a thumb rule, add as many checkpoints, or assertions. These assertions, are the ones, which are the most important, component of your test. They are the ones, who catch your bugs.
+  * And then we run it again and voila! its all green! 
+  * ![All Gree](ss/Step5.png)
+  * But wait, where is our DB? Lets set up a simple DB in our next step.
