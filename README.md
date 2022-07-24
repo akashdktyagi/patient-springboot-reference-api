@@ -151,4 +151,33 @@ Step by Step Guide. All the steps are managed in side different Branches.
   * But wait, where is our DB? Lets set up a simple DB in our next step.
   
 * Checkout Branch: ```6_h2_db_impl```
-  * Our test was getting passed earlier as well. Why? Because we already had a h2 db dependency created when we
+  * Our test was getting passed earlier as well. Why? Because we already had a h2 db dependency in your POM.xml. If not added you will have to add this to enabled embedded h2 db. Note, this is only for development purposes and in production this has to be replaced with actual DB.
+    ```xml
+    
+  		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+    
+    ```
+  * Once you add this dependency, you can add few config settings in your application.yml file.
+      * It will have settings for h2 DB. The DB console can be accessed at url: http:localhost:9096/h2-console
+      * ![H2 Console](ss/Step6-h2db.png)
+      * ![H2 DB Query](ss/step6-h2console.png)
+      * We also have to cofigure, datasource so that spring jpa will know which DB connection string to link.
+          ```yml
+          spring:
+            h2:
+              console.enabled: true
+              console.path: /h2-console
+              console.settings.trace: false
+              spring.h2.console.settings.web-allow-others: false
+            datasource:
+              url: jdbc:h2:mem:mydb # jdbc:h2:file:/data/demo if persistence is required for file
+              username: root
+              password: demo
+              driverClassName: org.h2.Driver
+            jpa:
+              spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+          ```
