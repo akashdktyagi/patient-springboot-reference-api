@@ -18,6 +18,5 @@ public class PatientRestController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public Patient createPatient(@RequestBody Patient patient){
         return patientService.createNewPatient(patient);
-
     }
 }
