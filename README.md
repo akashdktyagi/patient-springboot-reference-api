@@ -215,5 +215,18 @@ Step by Step Guide. All the steps are managed in side different Branches.
         path: swagger-ui.html
       ```
 ---
+  * Checkout Branch: ```8-new-features-get-put-delete```
+    * Well now we are back to BDD. Now we want our API to have the capability to get, update and delete the patient details.
+    * So we follow the same series of Steps which we did in step 2 i.e.
+        * Write the Features
+        * Run the Feature
+        * Copy the auto generated methods in the Step defs class file.
+        * Implement the metods and test code and assertions in these methods.
+        * Run them again and it fail again.
+        * Write the dev code, to make your test pass later. (Use Step 4 and Step 5, '4_impl_controller_post_end_point' to know how to add end points and servicess)
+        * All tests passesd, feature implemented successfully.
+        * Write the unit tests. (this is not part of the BDD/ATDD, but its an important step, which we will see later.)
+    ![Features put get delete](ss/Step8-newFeatures.png)
+    ![Spte Def Methods](ss/Step8-ErrorCucumberStepDef.png)
 
         

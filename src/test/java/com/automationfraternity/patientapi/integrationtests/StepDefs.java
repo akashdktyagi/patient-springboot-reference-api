@@ -66,4 +66,43 @@ public class StepDefs {
         resultsAction.andExpect(status().is(201));
         resultsAction.andExpect(content().string("{\"id\":1,\"name\":\"akash\",\"age\":\"37\",\"email\":\"akash@akash.com\",\"phone\":\"123456789\",\"medicalConditions\":\"i am just plain stupid\"}"));
     }
+
+    @Given("I have patient with email as {string}")
+    public void i_have_patient_with_email_as(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @When("I get the patient with email as {string}")
+    public void i_get_the_patient_with_email_as(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Then("patient details with email as {string} is returned")
+    public void patient_details_with_email_as_is_returned(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("I update the patient with email as {string} with new name {string}")
+    public void i_update_the_patient_with_email_as_with_new_name(String string, String string2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Then("patient with email as {string} is updated with new name as {string}")
+    public void patient_with_email_as_is_updated_with_new_name_as(String string, String string2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("I delete the patient with email as {string}")
+    public void i_delete_the_patient_with_email_as(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Then("patient with email as {string} is deleted")
+    public void patient_with_email_as_is_deleted(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
 }
