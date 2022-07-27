@@ -12,7 +12,9 @@ Step by Step Guide. All the steps are managed in side different Branches.
 * Is your API Impl "validatable" from Business person perspective.
 
 ### Steps to Follow: Keep Checkout the branch to see the changes done. Steps are managed under the branches to easily witness the changes made in each step.
-  
+
+---
+
 * Checkout Branch: ```1_feature_file_cucumber_setup```:
     * Add cucumber related libraries in the pom.xml file. 
         * below cucumber libraries are necessary
@@ -69,6 +71,8 @@ Step by Step Guide. All the steps are managed in side different Branches.
       
             ...
         ```
+---
+
 * Checkout Branch: ```2_add_cucumber_stepdef```
     * Run the Feature file again and this time you will see the step defs in the console as mentioned in above code snippet.
     * Copy the methods names and create a new class under integrationtests package and save the methods there.
@@ -87,6 +91,8 @@ Step by Step Guide. All the steps are managed in side different Branches.
     * But to highlight, we are not entirely doing a TDD or test driven development at the moment. We are still doing BDD, but TDD style!!
     * So far, our tests are failing but they are not failing due to api's expected functional behaviour or so to say, what this api should do. Lets implement the test in the next steps.
 
+---
+
 * Checkout Branch: ```3_added_mock_mvc_config_and_steps```
     * Well now in this step we will use Spring's Mock Mvc class to write our test.
     * MockMvc is a class which has all the necessary methods to make an http call and we can set the verb i.e. get/post/put/delete and other relevant information like contentType, Body, headers etc.
@@ -104,6 +110,7 @@ Step by Step Guide. All the steps are managed in side different Branches.
             java.lang.AssertionError: Response status expected:<201> but was:<404>
           
             ```
+---
 
 * Checkout Branch: ```4_impl_controller_post_end_point```
     * Now enough of tests. Now I need to make this test pass.
@@ -126,7 +133,9 @@ Step by Step Guide. All the steps are managed in side different Branches.
     * I have also modified, the server name in the test to point to http://localhost:9096
     * And now when I ran my test, the result was better than before; i.e. I am able to get a valid reply from the api i.e. status 200. 
     * But I know this is not correct and I need to implement more things, i.e Model class, DB connections, Service Class etc. All that we will do in next step.
-  
+
+---
+
 * Checkout Branch: ```5_impl_model_service_repo```
   * Now we are really focused on developing our API. 
   * You need four basic things, to create crud api. Controller, Service, Repository and lastly an DB instance.
@@ -150,17 +159,19 @@ Step by Step Guide. All the steps are managed in side different Branches.
   * ![All Gree](ss/Step5-cucumberstepspassed.png)
   * But wait, where is our DB? Lets set up a simple DB in our next step.
   
+---  
+
 * Checkout Branch: ```6_h2_db_impl```
   * Our test was getting passed earlier as well. Why? Because we already had a h2 db dependency in your POM.xml. If not added you will have to add this to enabled embedded h2 db. Note, this is only for development purposes and in production this has to be replaced with actual DB.
-    ```xml
-    
-  		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-    
-    ```
+  ```xml
+  
+      <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <scope>runtime</scope>
+      </dependency>
+  
+  ```
   * Once you add this dependency, you can add few config settings in your application.yml file.
       * It will have settings for h2 DB. The DB console can be accessed at url: http:localhost:9096/h2-console
       * ![H2 Console](ss/Step6-h2db.png)
@@ -181,3 +192,28 @@ Step by Step Guide. All the steps are managed in side different Branches.
             jpa:
               spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
           ```
+---
+  * Checkout Branch: ```7-swagger-impl```
+      * API Documentation is important so that the user or client know what this API is capable is doing.
+      * For this we can use Open API Specification aka swagger documentation.
+      * Dependency to be added. Add the latest version, else some time it does not work.
+      * Also add below lines in the application.yml file to configure the path. Navigate to the url: ```http://localhost:9096/swagger-ui/index.html```
+      * ![Step 7 Swagger](ss/Step7-swaggerUI.png)
+     ```xml
+      
+      <dependency>
+          <groupId>org.springdoc</groupId>
+          <artifactId>springdoc-openapi-ui</artifactId>
+          <version>1.6.9</version>
+      </dependency>
+      
+      ```
+     
+      ```yml
+      springdoc:
+        swagger-ui:
+        path: swagger-ui.html
+      ```
+---
+
+        
