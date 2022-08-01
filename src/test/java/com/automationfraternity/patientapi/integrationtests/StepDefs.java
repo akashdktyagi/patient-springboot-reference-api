@@ -11,6 +11,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,11 +24,13 @@ public class StepDefs {
 
     String server = "http://localhost:9096";
     String postEndPoint = "/patient";
+    String getEndPoint = "/patient";
     String body = "";
     ResultActions resultsAction;
 
     @Autowired
     MockMvc mockMvc;
+
 
     @Given("I have patient details as below")
     public void i_have_patient_details_as_below(Map<String,String> data) throws JsonProcessingException {
@@ -45,12 +50,6 @@ public class StepDefs {
         ObjectMapper objectMapper = new ObjectMapper();
         body = objectMapper.writeValueAsString(patient);
 
-//        body = "{\"name\": "+name+",\n" +
-//                "\"age\": "+age+",\n" +
-//                "\"email\": "+email+",\n" +
-//                "\"phone\": "+phone+",\n" +
-//                "\"medicalConditions\": "+medicalConditions+"\n" +
-//                "},";
     }
 
     @When("I create the patient")
@@ -61,6 +60,7 @@ public class StepDefs {
                             .content(body)
                         );
     }
+
     @Then("a new patient is created")
     public void a_new_patient_is_created() throws Exception {
         resultsAction.andExpect(status().is(201));
@@ -68,19 +68,35 @@ public class StepDefs {
     }
 
     @Given("I have patient with email as {string}")
-    public void i_have_patient_with_email_as(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void i_have_patient_with_email_as(String email) throws Exception {
+        Patient patient = Patient.builder()
+                .withName("name")
+                .withAge("12")
+                .withEmail(email)
+                .withPhone("12345")
+                .withMedicalConditions("fever")
+                .build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        body = objectMapper.writeValueAsString(patient);
+        mockMvc.perform(
+                post(URI.create(server + postEndPoint))
+                        .contentType("application/json")
+                        .content(body)
+        );
     }
     @When("I get the patient with email as {string}")
-    public void i_get_the_patient_with_email_as(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void i_get_the_patient_with_email_as(String email) throws Exception {
+        resultsAction = mockMvc.perform(
+                get(URI.create(server + getEndPoint +"/"+email))
+                        .contentType("application/json")
+                        .content(body)
+        );
     }
     @Then("patient details with email as {string} is returned")
-    public void patient_details_with_email_as_is_returned(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void patient_details_with_email_as_is_returned(String string) throws Exception {
+        resultsAction.andExpect(status().is(200));
+
+
     }
 
     @When("I update the patient with email as {string} with new name {string}")
