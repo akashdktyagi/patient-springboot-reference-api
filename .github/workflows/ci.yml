@@ -25,5 +25,10 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Build and Docker Push
+      env:
+        docker_hub_user_name: ${{ secrets.DOCKER_HUB_USER_NAME }}
+        docker_hub_password: ${{ secrets.DOCKER_HUB_REPO_SECRET_KEY }}
+#      run: mvn -B package --file pom.xml
+      run: mvn -f pom.xml clean install -Djib.to.auth.username=$docker_hub_user_name -Djib.to.auth.password=$docker_hub_password
+
