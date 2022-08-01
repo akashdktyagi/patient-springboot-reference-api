@@ -1,0 +1,18 @@
+version: "3"
+services:
+  patient-api:
+    image: yantraqa/patient-api:0.0.1
+    container_name: patient-api
+    ports:
+      - "9096:9096"
+    volumes:
+      - ./log:/log
+
+  doctor-api:
+    image: yantraqa/gotocloud-doctor-api:latest
+    container_name: gotocloud-doctor
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./log:/log1
+
