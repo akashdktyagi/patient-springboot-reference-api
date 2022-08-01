@@ -25,4 +25,14 @@ public class PatientService {
     public List<Patient> getPatient(String email) {
         return patientRepository.findByEmail(email);
     }
+
+    public Patient updatePatient(Patient patient) {
+        return patientRepository.save(patient);
+    }
+
+    public List<Patient> deletePatient(String email) {
+        List<Patient> patient = patientRepository.findByEmail(email);
+        patientRepository.deleteByEmail(email);
+        return patient;
+    }
 }

@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface PatientRepository extends JpaRepository<Patient,Long> {
     List<Patient> findByEmail(String email);
+    void deleteByEmail(String email);
 }

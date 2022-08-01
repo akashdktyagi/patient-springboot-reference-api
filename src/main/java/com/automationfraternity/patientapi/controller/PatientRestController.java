@@ -24,13 +24,25 @@ public class PatientRestController {
 
     @GetMapping("/patient")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<Patient> getAllPatient(@RequestParam (required = false) String email){
+    public List<Patient> getPatient(@RequestParam (required = false) String email){
         if(email==null){
             return patientService.getPatient();
         }else{
             return patientService.getPatient(email);
         }
+    }
 
+    @PutMapping("/patient")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Patient updatePatient(@RequestBody Patient patient){
+        return patientService.updatePatient(patient);
+    }
+
+    @DeleteMapping("/patient")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Patient> deletePatient(@RequestParam String email){
+        patientService.deletePatient(email);
+        return patientService.deletePatient(email);
     }
 
 }
