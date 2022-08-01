@@ -27,8 +27,8 @@ jobs:
 
     - name: Build and Docker Push
       env:
-        docker_hub_user_name: ${{ secrets.DOCKER_HUB_USER_NAME }}
-        docker_hub_password: ${{ secrets.DOCKER_HUB_REPO_SECRET_KEY }}
+        docker_hub_user_name: '333743'
+        docker_hub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
 #      run: mvn -B package --file pom.xml
       run: mvn -f pom.xml clean install -Djib.to.auth.username=$docker_hub_user_name -Djib.to.auth.password=$docker_hub_password
 

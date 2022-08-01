@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.automationfraternity</groupId>
 	<artifactId>patient-api</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>patient-api</name>
 	<description>Demo rest api for patient api</description>
 	<properties>
