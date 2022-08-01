@@ -82,6 +82,7 @@ public class StepDefs {
                 post(URI.create(server + postEndPoint))
                         .contentType("application/json")
                         .content(body)
+
         );
     }
     @When("I get the patient with email as {string}")
