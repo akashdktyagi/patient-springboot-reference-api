@@ -6,9 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,11 +27,15 @@ public class StepDefs {
     String server = "http://localhost:9096";
     String postEndPoint = "/patient";
     String getEndPoint = "/patient";
+    String putEndPoint = "/patient";
+    String deleteEndPoint = "/patient";
     String body = "";
     ResultActions resultsAction;
 
     @Autowired
     MockMvc mockMvc;
+
+    Patient patient;
 
 
     @Given("I have patient details as below")
@@ -40,7 +46,7 @@ public class StepDefs {
         String phone = data.get("phone");
         String medicalConditions = data.get("medicalConditions");
 
-        Patient patient = Patient.builder()
+        patient = Patient.builder()
                 .withName(name)
                 .withAge(age)
                 .withEmail(email)
@@ -69,7 +75,7 @@ public class StepDefs {
 
     @Given("I have patient with email as {string}")
     public void i_have_patient_with_email_as(String email) throws Exception {
-        Patient patient = Patient.builder()
+        patient = Patient.builder()
                 .withName("name")
                 .withAge("12")
                 .withEmail(email)
@@ -88,38 +94,47 @@ public class StepDefs {
     @When("I get the patient with email as {string}")
     public void i_get_the_patient_with_email_as(String email) throws Exception {
         resultsAction = mockMvc.perform(
-                get(URI.create(server + getEndPoint +"/"+email))
+                get(URI.create(server + getEndPoint +"?email="+email))
                         .contentType("application/json")
                         .content(body)
         );
     }
     @Then("patient details with email as {string} is returned")
-    public void patient_details_with_email_as_is_returned(String string) throws Exception {
+    public void patient_details_with_email_as_is_returned(String email) throws Exception {
         resultsAction.andExpect(status().is(200));
-
+        String responseBody = resultsAction.andReturn().getResponse().getContentAsString();
+        Assertions.assertThat(responseBody).containsSequence(email);
 
     }
 
     @When("I update the patient with email as {string} with new name {string}")
-    public void i_update_the_patient_with_email_as_with_new_name(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void i_update_the_patient_with_email_as_with_new_name(String email, String newName) throws Exception {
+        Patient patientWithNewName = patient.toBuilder().withName(newName).build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        body = objectMapper.writeValueAsString(patientWithNewName);
+        resultsAction = mockMvc.perform(
+                put(URI.create(server + putEndPoint+"?email="+email))
+                        .contentType("application/json")
+                        .content(body));
     }
     @Then("patient with email as {string} is updated with new name as {string}")
-    public void patient_with_email_as_is_updated_with_new_name_as(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void patient_with_email_as_is_updated_with_new_name_as(String oldEmail, String newName) throws Exception {
+        resultsAction.andExpect(status().is(201));
+        String responseBody = resultsAction.andReturn().getResponse().getContentAsString();
+        Assertions.assertThat(responseBody).containsSequence(newName);
     }
 
     @When("I delete the patient with email as {string}")
-    public void i_delete_the_patient_with_email_as(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void i_delete_the_patient_with_email_as(String email) throws Exception {
+        resultsAction = mockMvc.perform(
+                delete(URI.create(server + deleteEndPoint+"?email="+email)));
     }
     @Then("patient with email as {string} is deleted")
-    public void patient_with_email_as_is_deleted(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void patient_with_email_as_is_deleted(String email) throws Exception {
+        resultsAction.andExpect(status().is(200));
+        i_get_the_patient_with_email_as(email);
+        String responseString = resultsAction.andReturn().getResponse().getContentAsString();
+        Assertions.assertThat(responseString).doesNotContain(email);
     }
 
 }

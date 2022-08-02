@@ -5,6 +5,7 @@ import com.automationfraternity.patientapi.model.Patient;
 import com.automationfraternity.patientapi.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,13 +27,15 @@ public class PatientService {
         return patientRepository.findByEmail(email);
     }
 
-    public Patient updatePatient(Patient patient) {
+    public Patient updatePatient(Patient patient) throws Exception {
+        if (getPatient(patient.getEmail()).isEmpty()){
+            throw new Exception("Email Id not found. Can not update. " + patient.toString());
+        }
         return patientRepository.save(patient);
     }
 
-    public List<Patient> deletePatient(String email) {
-        List<Patient> patient = patientRepository.findByEmail(email);
+
+    public void deletePatient(String email) {
         patientRepository.deleteByEmail(email);
-        return patient;
     }
 }

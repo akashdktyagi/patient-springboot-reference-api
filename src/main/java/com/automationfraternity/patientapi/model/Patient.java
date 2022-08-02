@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
-@Builder(setterPrefix = "with")
+@Builder(setterPrefix = "with",toBuilder = true)
 @ToString
 @Entity
 @NoArgsConstructor
