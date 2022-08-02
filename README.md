@@ -316,3 +316,13 @@ Step by Step Guide. All the steps are managed in side different Branches.
 
 
 ```
+
+---
+
+* Checkout Branch: ```step-10-sonar-and-jacoco-code-coverage```
+    * We are done with our main feature and since we followed BDD, we are kind of also done with our integration tests. We can add more test however to cover negative scenarios, error codes etc, but for now this much is enough.
+    * Now we need to write two different kind of Tests. 
+      * Unit Tests: Unit Tests Code Coverage tells you if the tests which you wrote coveres how many lines of the actual code. Ideal number is 100 percent. But realistically it should be 80 percent plus. Unit Test Code Coverage tell you if you are writing the code "Right". Integration tests tells you if you are fullfills the required behaviour and both are equally important. Just for contrast, the TDD focuses more on Unit Tests. Since, we followed BDD/ATDD, we focused our test efforts in making the "Right" software. Unit tests are making the software right.
+      * Static Code Analysis: 
+            * This is required to check if your code has security issues and vulnerabilities. For this we can install Sonar Lint plugin in IntelliJ which checks continuously analyze while code and highlights the issue and code smells.
+            * But from CI CD pipe-line perspective this also needs to be added as a stage in the pipeline. For this we will use open source tool called as SonarQube.
