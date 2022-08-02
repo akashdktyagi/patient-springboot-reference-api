@@ -249,4 +249,70 @@ Step by Step Guide. All the steps are managed in side different Branches.
 * After we implement all the steps and API end points as well, all tests will pass:
 
 ![Step 8 Success](ss/Step8success.png)
-        
+
+
+
+---
+
+* Check out Branch: ```Step-9-dockerize-app-using-jib```
+    * Now since our app is ready we shall pacakage it. Best way to package is by containerizing it so that we can run it on kubernetes which also is our ultimate goal.
+    * There are two ways to dockerize a java app. Using conventional way i.e. using Dockerfile or using Google JIB. I will be using google JIB here. Google JIB has a added benefit i.e. it is a maven plugin so I can manage the docker config from with my pom.xml and secondly when we use google jib I do not need to have docker deamon (docker desktop etc) installed in the host machine.
+    * All I need to do is to add below config in the pom.xml and that's it.
+    * You can configure your container in many ways, however, this is how it looks with minimal settings.
+        * in the 'to' segment, mention your docker hub repo or any other repo where you want to push the image
+        * for tagging I am using the current project version
+        * mention the port
+    * this plugin gets triggered at package phase, as mentioned in below jenkins code snippet.
+    * it needs to be provided with credential of your docker hub account using command line argument, some thing like mvn clean pacakage -Djib.to.auth.username=$u -Djib.to.auth.password=$p
+    * I have covered this in this video series but there is another article and video on how to set up jenkins pipeline which I recorded earlier. You can see that as well here: https://github.com/akashdktyagi/springboot-ref-app-with-cucumber-test
+  
+  
+```shell
+
+  stage('Build Create and Push Image') {
+      steps {
+          withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'p', usernameVariable: 'u')]) {
+             sh "mvn -B clean install -Djib.to.auth.username=$u -Djib.to.auth.password=$p"
+          }
+
+      }     
+    }
+    
+```
+  
+
+```xml
+        <plugin>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>jib-maven-plugin</artifactId>
+            <version>3.2.1</version>
+            <configuration>
+                <from>
+                    <image>openjdk:11</image>
+                </from>
+                <to>
+                    <image>docker.io/yantraqa/patient-api:${project.version}</image>
+                </to>
+                <container>
+                    <jvmFlags>
+                        <jvmFlag>-Xms256m</jvmFlag>
+                        <jvmFlag>-Xmx512m</jvmFlag>
+                    </jvmFlags>
+                    <ports>
+                        <port>9096</port>
+                      </ports>
+                  </container>
+                  <allowInsecureRegistries>true</allowInsecureRegistries>
+              </configuration>
+              <executions>
+                  <execution>
+                      <phase>install</phase>
+                      <goals>
+                          <goal>build</goal>
+                      </goals>
+                  </execution>
+              </executions>
+			</plugin>
+
+
+```
