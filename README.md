@@ -216,7 +216,7 @@ Step by Step Guide. All the steps are managed in side different Branches.
       ```
 ---
   * Checkout Branch: ```8-new-features-get-put-delete```
-    * Well now we are back to BDD. Now we want our API to have the capability to get, update and delete the patient details.
+    * Well now we are back to Behaviour Driven Development. Now we want our API to have the capability to get, update and delete the patient details.
     * So we follow the same series of Steps which we did in step 2 i.e.
         * Write the Features
         * Run the Feature
@@ -226,7 +226,27 @@ Step by Step Guide. All the steps are managed in side different Branches.
         * Write the dev code, to make your test pass later. (Use Step 4 and Step 5, '4_impl_controller_post_end_point' to know how to add end points and servicess)
         * All tests passesd, feature implemented successfully.
         * Write the unit tests. (this is not part of the BDD/ATDD, but its an important step, which we will see later.)
-    ![Features put get delete](ss/Step8-newFeatures.png)
-    ![Spte Def Methods](ss/Step8-ErrorCucumberStepDef.png)
+        * Note: when we implement the delete end point we have have added spring annotation ```@Transacational``` in the controller class. This annotation is important we write "derived delete methods" like deleteByEmail()
+      
+```java
+    @Transactional
+    public void deletePatient(@RequestParam String email){
+        patientService.deletePatient(email);
+    }
+    
+    //----
+    //Patient Repo sitory class is the place to keep  derived methods
+    public interface PatientRepository extends JpaRepository<Patient,Long> {
+        List<Patient> findByEmail(String email);
+        void deleteByEmail(String email); // this is a derived delete method and any method which invokes this has to use @Transactinal annotation.
+    }
+    
+```
 
+![Features put get delete](ss/Step8-newFeatures.png)
+![Spte Def Methods](ss/Step8-ErrorCucumberStepDef.png)
+
+* After we implement all the steps and API end points as well, all tests will pass:
+
+![Step 8 Success](ss/Step8success.png)
         

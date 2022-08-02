@@ -4,6 +4,7 @@ import com.automationfraternity.patientapi.model.Patient;
 import com.automationfraternity.patientapi.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,15 +35,15 @@ public class PatientRestController {
 
     @PutMapping("/patient")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Patient updatePatient(@RequestBody Patient patient){
+    public Patient updatePatient(@RequestBody Patient patient) throws Exception {
         return patientService.updatePatient(patient);
     }
 
     @DeleteMapping("/patient")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<Patient> deletePatient(@RequestParam String email){
+    @Transactional
+    public void deletePatient(@RequestParam String email){
         patientService.deletePatient(email);
-        return patientService.deletePatient(email);
     }
 
 }
