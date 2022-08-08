@@ -1,6 +1,8 @@
 # patient-springboot-reference-api
-This repository contains the Spring Boot reference API with a Step by Step Guide on how to develop a Spring boot API using ```Behaviour Driven Development.``` 
+This repository contains the Spring Boot reference API with a Step by Step Guide on how to develop a Spring boot API using ```Behaviour Driven Development.```
+---
 
+### Summary: 
 * This API is being developed using Behaviour Driven Development methodology.
 * This methodolgy is a Bottom Down Approach i.e. Business Requirement Drives the Development of the Service.
 * In the Process we keep taking requirement from the Business (BA or Actual Client); we capture the requirement in the English Like Syntax called as <b>Gherkin</b>.
