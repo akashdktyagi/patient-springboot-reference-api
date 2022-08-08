@@ -1,19 +1,55 @@
 # patient-springboot-reference-api
-This repository is to hold a reference spring boot api and tutorial. This repo is a a sub project under gotocloud-appointment-app project.
+This repository contains the Spring Boot reference API with a Step by Step Guide on how to develop a Spring boot API using ```Behaviour Driven Development.``` 
 
+* This API is being developed using Behaviour Driven Development methodology.
+* This methodolgy is a Bottom Down Approach i.e. Business Requirement Drives the Development of the Service.
+* In the Process we keep taking requirement from the Business (BA or Actual Client); we capture the requirement in the English Like Syntax called as <b>Gherkin</b>.
+* The developer then keep running these requirements and keep implimenting them and in the process keep testing the app as well.
+* At the end, what you get is a full API which completely conforms to the Business Requirement, nothing less, nothing more.
 
+* Just to Highlight, there is another thing called ```Test Driven Development```. Wanted to assert that we are not doing TDD, TDD does not keep Business Requirment at its center, rather focused more on what can be called as "making the software, right way" and focused more on Unit Tests.
+* BDD or ATDD is primarily focused on the actual non technical requirements and making sure the developer is implementing exactly that.
+* Follow this guide and You will get to see, how this is done.
 ---
-Step by Step Guide. All the steps are managed in side different Branches.
 
+#### How to use this guide: 
+This is a Step by Step Guide. 
+I have maintained different Steps; which is nothing but a Topic which is maintained under different branches. Each Topic are numbered.
 
+```So, in short, Each Branch = A Step = A Topic```
 
-* We want to develop our API using Behaviour Driven Development methodology.
-* Advantages of this approach is quite simple. If you want your API to conform with the requirements given to you by the Business and you want to be absolutly sure that you have impl all the requirement and user journeys which Business asked you to do.
-* Is your API Impl "validatable" from Business person perspective.
+The latest version however is always merged in the master, so master contains the code of all the steps/Topics.
+
+Below are the series of Topics which is covered in this tutorial:
+* Step 0: Pre-requisite:  Create a Spring Boot ref API.
+* Step 1. Cucumber Feature File Creation
+* Step 2. Cucumber Step Def and Spring Boot Set Up
+* Step 3: Write Integration Tests First. BDD/ATDD. Branch: ```3_added_mock_mvc_config_and_steps```
+* Step 4: Add Spring Boot Controller Class and Create Post End Point. Branch:  ```4_impl_controller_post_end_point```
+* Step 5: Add Model and Service for Patient Entity. Branch:    ```5_impl_model_service_repo`````
+* Step 6: Add H2 Database. Branch:   ```6_h2_db_impl```
+* Step 7: Create API Documentation using Open Spec and Swagger. Branch:  ```7-swagger-impl```
+* Step 8: Add new Cucumber Feature file for PUT/POST/DELETE API end point and test vcases. Branch:  ```8-new-features-get-put-delete```
+* Step 9: Dockerize the APP using Google JIB and Push image to Docker HUB. Branch:  ```Step-9-dockerize-app-using-jib```
+* Step 10: Configure Sonar Qube for Code Smell and Static Code analysis. Add Unit Tests for 80 percent code Coverage. Jacoco plugin to generate code coverage reports. Branch:  ```step-10-sonar-and-jacoco-code-coverage```
+* Step 11: ```Not Started``` TODO: Impl Central Error Management in API.
+* Step 12: ```Not Started``` TODO: Secure your API
+* Step 13: ```Not Started``` TODO: Configure CI using Git Hub Actions
+* Step 14: ```Not Started``` TODO: Configure CD using Git Hub Actions and Deploy on AWS Elastic Kubernetes Services.
+* Step 15: ```Not Started``` TODO: Write Post Deployment Integration Tests.
+* Step 16: ```Not Started``` TODO: Run Post deployment Performance Tests.
+  
+
 
 ### Steps to Follow: Keep Checkout the branch to see the changes done. Steps are managed under the branches to easily witness the changes made in each step.
 
 ---
+
+#### Step 0: Spring.io Init 
+* Use Spring Initializer URL: https://start.spring.io/.
+* Add dependencies as mentioned in the below Screen shot.
+* Download the project and open it in IntelliJ
+![Spring Init](ss/Step0-SpringInit.png)
 
 * Checkout Branch: ```1_feature_file_cucumber_setup```:
     * Add cucumber related libraries in the pom.xml file. 
