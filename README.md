@@ -26,7 +26,7 @@ The latest version however is always merged in the master, so master contains th
 Below are the series of Topics which is covered in this tutorial:
 * Step 0: Pre-requisite:  Create a Spring Boot ref API.
 * Step 1. Cucumber Feature File Creation
-* Step 2. Cucumber Step Def and Spring Boot Set Up
+* Step 2. Cucumber Step Def and Cucumber Spring Set Up
 * Step 3: Write Integration Tests First. BDD/ATDD. Branch: ```3_added_mock_mvc_config_and_steps```
 * Step 4: Add Spring Boot Controller Class and Create Post End Point. Branch:  ```4_impl_controller_post_end_point```
 * Step 5: Add Model and Service for Patient Entity. Branch:    ```5_impl_model_service_repo`````
@@ -53,6 +53,8 @@ Below are the series of Topics which is covered in this tutorial:
 * Add dependencies as mentioned in the below Screen shot.
 * Download the project and open it in IntelliJ
 ![Spring Init](ss/Step0-SpringInit.png)
+
+#### Step 1: Cucumber Feature File Creation
 
 * Checkout Branch: ```1_feature_file_cucumber_setup```:
     * Add cucumber related libraries in the pom.xml file. 
@@ -112,6 +114,8 @@ Below are the series of Topics which is covered in this tutorial:
         ```
 ---
 
+#### Step 2. Cucumber Step Def and Cucumber Spring Set Up
+
 * Checkout Branch: ```2_add_cucumber_stepdef```
     * Run the Feature file again and this time you will see the step defs in the console as mentioned in above code snippet.
     * Copy the methods names and create a new class under integrationtests package and save the methods there.
@@ -132,6 +136,8 @@ Below are the series of Topics which is covered in this tutorial:
 
 ---
 
+#### Step 3: Write Integration Tests First. BDD/ATDD
+
 * Checkout Branch: ```3_added_mock_mvc_config_and_steps```
     * Well now in this step we will use Spring's Mock Mvc class to write our test.
     * MockMvc is a class which has all the necessary methods to make an http call and we can set the verb i.e. get/post/put/delete and other relevant information like contentType, Body, headers etc.
@@ -150,6 +156,8 @@ Below are the series of Topics which is covered in this tutorial:
           
             ```
 ---
+
+#### Step 4: Add Spring Boot Controller Class and Create Post End Point
 
 * Checkout Branch: ```4_impl_controller_post_end_point```
     * Now enough of tests. Now I need to make this test pass.
@@ -175,6 +183,8 @@ Below are the series of Topics which is covered in this tutorial:
 
 ---
 
+#### Step 5: Add Model and Service for Patient Entity
+
 * Checkout Branch: ```5_impl_model_service_repo```
   * Now we are really focused on developing our API. 
   * You need four basic things, to create crud api. Controller, Service, Repository and lastly an DB instance.
@@ -199,6 +209,8 @@ Below are the series of Topics which is covered in this tutorial:
   * But wait, where is our DB? Lets set up a simple DB in our next step.
   
 ---  
+
+#### Step 6: Add H2 Database
 
 * Checkout Branch: ```6_h2_db_impl```
   * Our test was getting passed earlier as well. Why? Because we already had a h2 db dependency in your POM.xml. If not added you will have to add this to enabled embedded h2 db. Note, this is only for development purposes and in production this has to be replaced with actual DB.
@@ -232,48 +244,53 @@ Below are the series of Topics which is covered in this tutorial:
               spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
           ```
 ---
-  * Checkout Branch: ```7-swagger-impl```
-      * API Documentation is important so that the user or client know what this API is capable is doing.
-      * For this we can use Open API Specification aka swagger documentation.
-      * Dependency to be added. Add the latest version, else some time it does not work.
-      * Also add below lines in the application.yml file to configure the path. Navigate to the url: ```http://localhost:9096/swagger-ui/index.html```
-      * ![Step 7 Swagger](ss/Step7-swaggerUI.png)
-     ```xml
-      
-      <dependency>
-          <groupId>org.springdoc</groupId>
-          <artifactId>springdoc-openapi-ui</artifactId>
-          <version>1.6.9</version>
-      </dependency>
-      
-      ```
-     
-      ```yml
-      springdoc:
-        swagger-ui:
-        path: swagger-ui.html
-      ```
+
+#### Step 7: Create API Documentation using Open Spec and Swagger
+
+* Checkout Branch: ```7-swagger-impl```
+  * API Documentation is important so that the user or client know what this API is capable is doing.
+  * For this we can use Open API Specification aka swagger documentation.
+  * Dependency to be added. Add the latest version, else some time it does not work.
+  * Also add below lines in the application.yml file to configure the path. Navigate to the url: ```http://localhost:9096/swagger-ui/index.html```
+  * ![Step 7 Swagger](ss/Step7-swaggerUI.png)
+ ```xml
+  
+  <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.6.9</version>
+  </dependency>
+  
+  ```
+ 
+  ```yml
+  springdoc:
+    swagger-ui:
+    path: swagger-ui.html
+  ```
 ---
-  * Checkout Branch: ```8-new-features-get-put-delete```
-    * Well now we are back to Behaviour Driven Development. Now we want our API to have the capability to get, update and delete the patient details.
-    * So we follow the same series of Steps which we did in step 2 i.e.
-        * Write the Features
-        * Run the Feature
-        * Copy the auto generated methods in the Step defs class file.
-        * Implement the metods and test code and assertions in these methods.
-        * Run them again and it fail again.
-        * Write the dev code, to make your test pass later. (Use Step 4 and Step 5, '4_impl_controller_post_end_point' to know how to add end points and servicess)
-        * All tests passesd, feature implemented successfully.
-        * Write the unit tests. (this is not part of the BDD/ATDD, but its an important step, which we will see later.)
-        * Note: when we implement the delete end point we have have added spring annotation ```@Transacational``` in the controller class. This annotation is important we write "derived delete methods" like deleteByEmail()
-      
+
+#### Step 8: Add new Cucumber Feature file for PUT/POST/DELETE API end point and test cases
+
+* Checkout Branch: ```8-new-features-get-put-delete```
+* Well now we are back to Behaviour Driven Development. Now we want our API to have the capability to get, update and delete the patient details.
+* So we follow the same series of Steps which we did in step 2 i.e.
+    * Write the Features
+    * Run the Feature
+    * Copy the auto generated methods in the Step defs class file.
+    * Implement the metods and test code and assertions in these methods.
+    * Run them again and it fail again.
+    * Write the dev code, to make your test pass later. (Use Step 4 and Step 5, '4_impl_controller_post_end_point' to know how to add end points and servicess)
+    * All tests passesd, feature implemented successfully.
+    * Write the unit tests. (this is not part of the BDD/ATDD, but its an important step, which we will see later.)
+    * Note: when we implement the delete end point we have have added spring annotation ```@Transacational``` in the controller class. This annotation is important we write "derived delete methods" like deleteByEmail()
+    
 ```java
     @Transactional
     public void deletePatient(@RequestParam String email){
         patientService.deletePatient(email);
     }
     
-    //----
     //Patient Repo sitory class is the place to keep  derived methods
     public interface PatientRepository extends JpaRepository<Patient,Long> {
         List<Patient> findByEmail(String email);
@@ -289,9 +306,9 @@ Below are the series of Topics which is covered in this tutorial:
 
 ![Step 8 Success](ss/Step8success.png)
 
-
-
 ---
+
+#### Step 9: Dockerize the APP using Google JIB and Push image to Docker HUB.
 
 * Check out Branch: ```Step-9-dockerize-app-using-jib```
     * Now since our app is ready we shall pacakage it. Best way to package is by containerizing it so that we can run it on kubernetes which also is our ultimate goal.
@@ -304,8 +321,7 @@ Below are the series of Topics which is covered in this tutorial:
     * this plugin gets triggered at package phase, as mentioned in below jenkins code snippet.
     * it needs to be provided with credential of your docker hub account using command line argument, some thing like mvn clean pacakage -Djib.to.auth.username=$u -Djib.to.auth.password=$p
     * I have covered this in this video series but there is another article and video on how to set up jenkins pipeline which I recorded earlier. You can see that as well here: https://github.com/akashdktyagi/springboot-ref-app-with-cucumber-test
-  
-  
+    
 ```shell
 
   stage('Build Create and Push Image') {
@@ -318,40 +334,43 @@ Below are the series of Topics which is covered in this tutorial:
     }
     
 ```
-  
 
 ```xml
-        <plugin>
-            <groupId>com.google.cloud.tools</groupId>
-            <artifactId>jib-maven-plugin</artifactId>
-            <version>3.2.1</version>
-            <configuration>
-                <from>
-                    <image>openjdk:11</image>
-                </from>
-                <to>
-                    <image>docker.io/yantraqa/patient-api:${project.version}</image>
-                </to>
-                <container>
-                    <jvmFlags>
-                        <jvmFlag>-Xms256m</jvmFlag>
-                        <jvmFlag>-Xmx512m</jvmFlag>
-                    </jvmFlags>
-                    <ports>
-                        <port>9096</port>
-                      </ports>
-                  </container>
-                  <allowInsecureRegistries>true</allowInsecureRegistries>
-              </configuration>
-              <executions>
-                  <execution>
-                      <phase>install</phase>
-                      <goals>
-                          <goal>build</goal>
-                      </goals>
-                  </execution>
-              </executions>
-			</plugin>
-
+    <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>3.2.1</version>
+        <configuration>
+            <from>
+                <image>openjdk:11</image>
+            </from>
+            <to>
+                <image>docker.io/yantraqa/patient-api:${project.version}</image>
+            </to>
+            <container>
+                <jvmFlags>
+                    <jvmFlag>-Xms256m</jvmFlag>
+                    <jvmFlag>-Xmx512m</jvmFlag>
+                </jvmFlags>
+                <ports>
+                    <port>9096</port>
+                  </ports>
+              </container>
+              <allowInsecureRegistries>true</allowInsecureRegistries>
+          </configuration>
+          <executions>
+              <execution>
+                  <phase>install</phase>
+                  <goals>
+                      <goal>build</goal>
+                  </goals>
+              </execution>
+          </executions>
+    </plugin>
 
 ```
+
+---
+
+#### Step 10: Configure Sonar Qube for Code Smell and Static Code analysis. Add Unit Tests for 80 percent code Coverage. Jacoco plugin to generate code coverage reports.
+
