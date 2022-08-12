@@ -7,9 +7,8 @@ This repository contains the Spring Boot reference API with a Step by Step Guide
 * This API is being developed using Behaviour Driven Development methodology.
 * This methodolgy is a Bottom Down Approach i.e. Business Requirement Drives the Development of the Service.
 * In the Process we keep taking requirement from the Business (BA or Actual Client); we capture the requirement in the English Like Syntax called as <b>Gherkin</b>.
-* The developer then keep running these requirements and keep implimenting them and in the process keep testing the app as well.
+* The developer then keep running these requirements and keep implementing them and in the process keep testing the app as well.
 * At the end, what you get is a full API which completely conforms to the Business Requirement, nothing less, nothing more.
-
 * Just to Highlight, there is another thing called ```Test Driven Development```. Wanted to assert that we are not doing TDD, TDD does not keep Business Requirment at its center, rather focused more on what can be called as "making the software, right way" and focused more on Unit Tests.
 * BDD or ATDD is primarily focused on the actual non technical requirements and making sure the developer is implementing exactly that.
 * Follow this guide and You will get to see, how this is done.
