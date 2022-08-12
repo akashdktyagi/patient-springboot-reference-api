@@ -1,5 +1,6 @@
 # patient-springboot-reference-api
 This repository contains the Spring Boot reference API with a Step by Step Guide on how to develop a Spring boot API using ```Behaviour Driven Development.```
+
 ---
 
 ### Summary: 
@@ -12,6 +13,7 @@ This repository contains the Spring Boot reference API with a Step by Step Guide
 * Just to Highlight, there is another thing called ```Test Driven Development```. Wanted to assert that we are not doing TDD, TDD does not keep Business Requirment at its center, rather focused more on what can be called as "making the software, right way" and focused more on Unit Tests.
 * BDD or ATDD is primarily focused on the actual non technical requirements and making sure the developer is implementing exactly that.
 * Follow this guide and You will get to see, how this is done.
+
 ---
 
 #### How to use this guide: 
