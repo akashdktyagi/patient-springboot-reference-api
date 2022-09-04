@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+@CrossOrigin //All origins are allowed. Not a secure way though
 public class PatientRestController {
 
     @Autowired
