@@ -214,15 +214,17 @@ Below are the series of Topics which is covered in this tutorial:
 
 * Checkout Branch: ```6_h2_db_impl```
   * Our test was getting passed earlier as well. Why? Because we already had a h2 db dependency in your POM.xml. If not added you will have to add this to enabled embedded h2 db. Note, this is only for development purposes and in production this has to be replaced with actual DB.
-  ```xml
   
-      <dependency>
-          <groupId>com.h2database</groupId>
-          <artifactId>h2</artifactId>
-          <scope>runtime</scope>
-      </dependency>
-  
-  ```
+    ```xml
+      
+          <dependency>
+              <groupId>com.h2database</groupId>
+              <artifactId>h2</artifactId>
+              <scope>runtime</scope>
+          </dependency>
+      
+    ```
+    
   * Once you add this dependency, you can add few config settings in your application.yml file.
       * It will have settings for h2 DB. The DB console can be accessed at url: http:localhost:9096/h2-console
       * ![H2 Console](ss/Step6-h2db.png)
@@ -254,7 +256,7 @@ Below are the series of Topics which is covered in this tutorial:
   * Also add below lines in the application.yml file to configure the path. Navigate to the url: ```http://localhost:9096/swagger-ui/index.html```
   * ![Step 7 Swagger](ss/Step7-swaggerUI.png)
  ```xml
-  
+
   <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-ui</artifactId>
@@ -268,6 +270,7 @@ Below are the series of Topics which is covered in this tutorial:
     swagger-ui:
     path: swagger-ui.html
   ```
+
 ---
 
 #### Step 8: Add new Cucumber Feature file for PUT/POST/DELETE API end point and test cases
@@ -374,3 +377,6 @@ Below are the series of Topics which is covered in this tutorial:
 
 #### Step 10: Configure Sonar Qube for Code Smell and Static Code analysis. Add Unit Tests for 80 percent code Coverage. Jacoco plugin to generate code coverage reports.
 
+#### Step 11: 11-cors-handling-in-controller
+* To allow the UI to reach the api. Currently, all domains is allowed, not secure.
+* Read more here: https://www.baeldung.com/spring-cors
