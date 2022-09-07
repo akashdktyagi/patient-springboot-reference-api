@@ -105,7 +105,9 @@
 						<image>openjdk:11</image>
 					</from>
 					<to>
-						<image>docker.io/yantraqa/patient-api:${project.version}</image>
+<!--						<image>docker.io/yantraqa/patient-api:${project.version}</image>-->
+						<image>public.ecr.aws/z3i9f6u3/patient-api:${project.version}</image>
+
 					</to>
 					<container>
 						<jvmFlags>
